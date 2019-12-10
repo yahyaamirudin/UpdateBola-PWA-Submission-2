@@ -15,8 +15,8 @@
   <!-- Navigasi -->
   <nav class="teal lighten-1" role="navigation">
     <div class="nav-wrapper container">
-      <a href="#" class="brand-logo" id="logo-container">Update bola</a>
-      <a href="#" class="sidenav-trigger" data-target="nav-mobile">☰</a>
+      <a href="/" class="brand-logo" id="logo-container">Update bola</a>
+      <a href="/" class="sidenav-trigger" data-target="nav-mobile">☰</a>
       <ul class="topnav right hide-on-med-and-down"></ul>
       <ul class="sidenav" id="nav-mobile"></ul>
     </div>
@@ -27,7 +27,7 @@
   <script src="js/materialize.min.js"></script>
   <script src="js/api.js"></script>
   <script src="js/nav.js"></script>
-  <script type="text/javascript" src="js/idb-2.1.3/lib/idb.js"></script>
+  <script type="text/javascript" src="js/idb.js"></script>
   <script src="js/db.js"></script>
   
 
@@ -42,7 +42,7 @@
           })
           .catch(function () {
             console.log("Pendaftaran ServiceWorker gagal");
-          });
+          }); 
       });
     } else {
       console.log("ServiceWorker belum didukung browser ini.");

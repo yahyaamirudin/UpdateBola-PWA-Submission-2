@@ -109,17 +109,7 @@ function getDetailTeam() {
       let squadHTML = "";
       let daftarHTML = "";
       let dbInsertFav;
-      // data.result.forEach(tabel => {
       data.squad.forEach(pemain => {
-          // const player = {
-          //   pemain :pemain.id,
-          //   name :pemain.name,
-          //   date :pemain.dateOfBirth,
-          //   count :pemain.countryOfBirth,
-          //   nation :pemain.nationality,
-          //   role :pemain.role
-          // }
-          // console.log(player)
         squadHTML +=
           `
             <tr>
@@ -129,7 +119,7 @@ function getDetailTeam() {
               <td id ="dat">${pemain.dateOfBirth}</td>
               <td id ="count">${pemain.countryOfBirth}</td>
               <td id ="nat">${pemain.nationality}</td>
-              <td id ="role">${pemain.role}</td>
+              
               <td>
               <button onclick="dbInsertFav(${pemain.id})">Favorite</button>
             </td>
@@ -151,7 +141,7 @@ function getDetailTeam() {
                       <th>Tanggal lahir</th>
                       <th>Tempat lahir</th>
                       <th>Kewarganegaraan</th>
-                      <th>Role</th>
+                     
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -168,3 +158,39 @@ function getDetailTeam() {
     })
     .catch(error);
 }
+
+
+function showFav() {
+  DbshowPlayerFav().then(playerFav => {
+      let listPlayer = "";
+      playerFav.forEach(data => {
+          console.log(data)
+          listPlayer += `
+         <tr>
+           <td>${data.id}</td>
+           <td>${data.name}</td>
+           <td>${data.firstName}</td>
+           <td>${data.lastName}</td>
+           <td>${data.dateOfBirth}</td>
+           <td>${data.countryOfBirth}</td>
+           <td>${data.nationality}</td>
+           <td>${data.position}</td>
+           <td>${data.lastUpdated}</td>
+           <td><button id="${data.id}" class="removeButton">Remove</button></td>
+         </tr>
+         `;
+      });
+      document.getElementById("fav").innerHTML = listPlayer;
+      //    let removeButtons = document.querySelectorAll(".removeButton");
+      //    for(let button of removeButtons) {
+      //        button.addEventListener("click", function (event) {
+      //            let bookId = event.target.id;
+      //            dbDeleteBook(bookId).then(() => {
+      //                showAllBook()
+      //            })
+      //        })
+      //    }
+  })
+}
+
+showFav();
