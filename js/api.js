@@ -108,23 +108,35 @@ function getDetailTeam() {
       console.log(data);
       let squadHTML = "";
       let daftarHTML = "";
+      let dbInsertFav;
       // data.result.forEach(tabel => {
       data.squad.forEach(pemain => {
-        squadHTML += `
+          // const player = {
+          //   pemain :pemain.id,
+          //   name :pemain.name,
+          //   date :pemain.dateOfBirth,
+          //   count :pemain.countryOfBirth,
+          //   nation :pemain.nationality,
+          //   role :pemain.role
+          // }
+          // console.log(player)
+        squadHTML +=
+          `
             <tr>
+              <td id ="id">${pemain.id}</td>
+              <td id ="name">${pemain.name}</td>
+              <td id ="pos">${pemain.position}</td>
+              <td id ="dat">${pemain.dateOfBirth}</td>
+              <td id ="count">${pemain.countryOfBirth}</td>
+              <td id ="nat">${pemain.nationality}</td>
+              <td id ="role">${pemain.role}</td>
               <td>
-              <p class="hide-on-small-only">
-          ${pemain.name}
-          </p>
-              </td>
-              <td>${pemain.position}</td>
-              <td>${pemain.dateOfBirth}</td>
-              <td>${pemain.countryOfBirth}</td>
-              <td>${pemain.nationality}</td>
-              <td>${pemain.role}</td>\
+              <button onclick="dbInsertFav(${pemain.id})">Favorite</button>
+            </td>
             </tr>
           `
       });
+      
       daftarHTML += `
         <div class="row">
           <div class="col s12 m12" id="tabelKlasmen">
@@ -133,12 +145,14 @@ function getDetailTeam() {
                 <table class="responsive-table striped ">
                   <thead>
                     <tr>
+                    <th>ID</th>
                       <th>Nama</th>
                       <th>Posisi</th>
                       <th>Tanggal lahir</th>
                       <th>Tempat lahir</th>
                       <th>Kewarganegaraan</th>
                       <th>Role</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
