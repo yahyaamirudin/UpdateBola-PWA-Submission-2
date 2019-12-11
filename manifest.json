@@ -6,6 +6,7 @@
     "display": "standalone",
     "background_color": "#00897B",
     "theme_color": "#00897B",
+    "gcm_sender_id": "109931818461",
     "icons": [
         {
             "src": "yahya.png",

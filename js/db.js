@@ -23,6 +23,11 @@ function DbshowPlayerFav() {
 };
 
 const dbinsertfav = player => {
+  const title = 'Pemain Favorit berhasil ditambah';
+  const options = {
+    'body': 'anda bisa melihat pemain favorit anda dihalaman favorit',
+  }
+  const title2 = 'Pemain Favorit gagal ditambah';
   return new Promise((resolve, reject) => {
     idbPromise.then(db => {
       const transaction = db.transaction("playerFav", `readwrite`);
@@ -30,9 +35,23 @@ const dbinsertfav = player => {
       return transaction;
     }).then(transaction => {
       if (transaction.complete) {
-        console.log('data pemain berhasi di favoritkan')
+        if (Notification.permission === 'granted') {
+          navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification(title, options);
+          })
+        } else {
+          console.error('FItur notifikasi tidak diijinkan.');
+        }
+        // console.log('data pemain berhasi di favoritkan')
         resolve(true)
       } else {
+        if (Notification.permission === 'granted') {
+          navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification(title2);
+          })
+        } else {
+          console.error('FItur notifikasi tidak diijinkan.');
+        }
         reject(new Error(transaction.onerror))
         console.log('data pemain gagal di favoritkan')
       }
@@ -40,7 +59,9 @@ const dbinsertfav = player => {
   })
 };
 
-const dbDeletePlayer = (id)=>{
+const dbDeletePlayer = (id) => {
+  const title = 'Pemain Favorit berhasil dihapus';
+  const title2 = 'Pemain Favorit gagal dihapus';
   return new Promise((resolve, reject) => {
     idbPromise.then(db => {
       const transaction = db.transaction("playerFav", `readwrite`);
@@ -48,8 +69,22 @@ const dbDeletePlayer = (id)=>{
       return transaction;
     }).then(transaction => {
       if (transaction.complete) {
+        if (Notification.permission === 'granted') {
+          navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification(title);
+          })
+        } else {
+          console.error('FItur notifikasi tidak diijinkan.');
+        }
         resolve(true)
       } else {
+        if (Notification.permission === 'granted') {
+          navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification(title2);
+          })
+        } else {
+          console.error('FItur notifikasi tidak diijinkan.');
+        }
         reject(new Error(transaction.onerror))
       }
     })
