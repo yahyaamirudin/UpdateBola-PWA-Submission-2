@@ -160,27 +160,60 @@ function getDetailTeam() {
 }
 
 
-function showFav() {
+function showAllPlayer() {
   DbshowPlayerFav().then(playerFav => {
       let listPlayer = "";
+      let daftarHTML="";
       playerFav.forEach(data => {
           console.log(data)
           listPlayer += `
          <tr>
            <td>${data.id}</td>
-           <td>${data.name}</td>
-           <td>${data.firstName}</td>
-           <td>${data.lastName}</td>
-           <td>${data.dateOfBirth}</td>
-           <td>${data.countryOfBirth}</td>
-           <td>${data.nationality}</td>
-           <td>${data.position}</td>
-           <td>${data.lastUpdated}</td>
+           <td>${data.nama}</td>
+           <td>${data.awal}</td>
+           <td>${data.akhir}</td>
+           <td>${data.tanggal}</td>
+           <td>${data.tempat}</td>
+           <td>${data.negara}</td>
+           <td>${data.posisi}</td>
+           <td>${data.Update}</td>
            <td><button id="${data.id}" class="removeButton">Remove</button></td>
          </tr>
          `;
       });
-      document.getElementById("fav").innerHTML = listPlayer;
+      daftarHTML += `
+      <div class="row">
+        <div class="col s12 m12" id="tabelKlasmen">
+          <div class="card">
+            <div class="card-content">
+              <table class="responsive-table striped ">
+                <thead>
+                  <tr>
+                  <th>ID</th>
+                    <th>Nama</th>
+                    <th>Posisi</th>
+                    <th>Tanggal lahir</th>
+                    <th>Tempat lahir</th>
+                    <th>Kewarganegaraan</th>
+                   
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${listPlayer}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>`
+      console.log(listPlayer)
+      document.getElementById("favorit").innerHTML= daftarHTML;
+  })
+}
+showAllPlayer();
+
+
       //    let removeButtons = document.querySelectorAll(".removeButton");
       //    for(let button of removeButtons) {
       //        button.addEventListener("click", function (event) {
@@ -190,7 +223,3 @@ function showFav() {
       //            })
       //        })
       //    }
-  })
-}
-
-showFav();

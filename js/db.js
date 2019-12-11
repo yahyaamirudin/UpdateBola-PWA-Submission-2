@@ -11,6 +11,7 @@ function DbshowPlayerFav(){
     idbPromise.then(db => {
       const transaction = db.transaction("playerFav", `readonly`);
       return transaction.objectStore("playerFav").getAll();
+      // console.log(transaction)
     }).then(data => {
       if (data !== undefined) {
         resolve(data)
