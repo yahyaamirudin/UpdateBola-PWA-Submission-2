@@ -6,7 +6,7 @@ let idbPromise = idb.open('BolaDB', 1, upgradedDb => {
   }
 });
 
-function DbshowPlayerFav(){
+function DbshowPlayerFav() {
   return new Promise((resolve, reject) => {
     idbPromise.then(db => {
       const transaction = db.transaction("playerFav", `readonly`);
@@ -24,18 +24,35 @@ function DbshowPlayerFav(){
 
 const dbinsertfav = player => {
   return new Promise((resolve, reject) => {
-      idbPromise.then(db => {
-          const transaction = db.transaction("playerFav",`readwrite`);
-          transaction.objectStore("playerFav").add(player);
-          return transaction;
-      }).then(transaction => {
-          if (transaction.complete) {
-            console.log('data pemain berhasi di favoritkan')
-              resolve(true)
-          } else {
-              reject(new Error(transaction.onerror))
-              console.log('data pemain gagal di favoritkan')
-          }
-      })
+    idbPromise.then(db => {
+      const transaction = db.transaction("playerFav", `readwrite`);
+      transaction.objectStore("playerFav").add(player);
+      return transaction;
+    }).then(transaction => {
+      if (transaction.complete) {
+        console.log('data pemain berhasi di favoritkan')
+        resolve(true)
+      } else {
+        reject(new Error(transaction.onerror))
+        console.log('data pemain gagal di favoritkan')
+      }
+    })
   })
 };
+
+const dbDeletePlayer = (id)=>{
+  return new Promise((resolve, reject) => {
+    idbPromise.then(db => {
+      const transaction = db.transaction("playerFav", `readwrite`);
+      transaction.objectStore("playerFav").delete(id);
+      return transaction;
+    }).then(transaction => {
+      if (transaction.complete) {
+        resolve(true)
+      } else {
+        reject(new Error(transaction.onerror))
+      }
+    })
+  })
+
+}

@@ -177,9 +177,16 @@ function showAllPlayer() {
            <td>${data.negara}</td>
            <td>${data.posisi}</td>
            <td>${data.Update}</td>
-           <td><button id="${data.id}" class="removeButton">Remove</button></td>
+           <td><button onclick="dbDeletePlayer(${data.id})">Delete</button></td>
          </tr>
          `;
+         let removeButtons = document.querySelectorAll(".removeButton");
+         for(let button of removeButtons) {
+             button.addEventListener("click", function (event) {
+                 let id = event.target.id;
+                 dbDeletePlayer(id);
+             })
+         }
       });
       daftarHTML += `
       <div class="row">
@@ -207,19 +214,11 @@ function showAllPlayer() {
           </div>
         </div>
       </div>`
-      console.log(listPlayer)
+      // console.log(listPlayer)
       document.getElementById("favorit").innerHTML= daftarHTML;
   })
 }
-showAllPlayer();
 
 
-      //    let removeButtons = document.querySelectorAll(".removeButton");
-      //    for(let button of removeButtons) {
-      //        button.addEventListener("click", function (event) {
-      //            let bookId = event.target.id;
-      //            dbDeleteBook(bookId).then(() => {
-      //                showAllBook()
-      //            })
-      //        })
-      //    }
+
+     

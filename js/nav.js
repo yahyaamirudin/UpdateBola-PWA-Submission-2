@@ -44,6 +44,12 @@ function loadPage(page) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
             var content = document.querySelector("#body-content");
+            if(page === "klasemen"){
+                getKlasemen();
+            }
+            else if(page === "favorit"){
+                showAllPlayer();
+            }
             if (this.status == 200) {
                 content.innerHTML = xhttp.responseText;
             } else if (this.status == 404) {
