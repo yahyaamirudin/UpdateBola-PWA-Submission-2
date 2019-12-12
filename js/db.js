@@ -31,7 +31,7 @@ const dbinsertfav = player => {
   return new Promise((resolve, reject) => {
     idbPromise.then(db => {
       const transaction = db.transaction("playerFav", `readwrite`);
-      transaction.objectStore("playerFav").add(player);
+      transaction.objectStore("playerFav").put(player);
       return transaction;
     }).then(transaction => {
       if (transaction.complete) {
